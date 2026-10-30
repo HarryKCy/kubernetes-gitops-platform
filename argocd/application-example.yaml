@@ -1,0 +1,18 @@
+# SAMPLE ONLY. Set the repoURL to the actual repository after publishing.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sre-demo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/HarryKCy/kubernetes-gitops-platform.git
+    targetRevision: main
+    path: k8s/overlays/dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: sre-demo
+  syncPolicy:
+    syncOptions: [CreateNamespace=true]
+  # Deliberately no automated prune or selfHeal until tested in a disposable cluster.

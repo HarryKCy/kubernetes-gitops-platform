@@ -1,0 +1,12 @@
+name: Kubernetes manifest validation
+on: [push, pull_request]
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-kubectl@v4
+        with:
+          version: 'v1.31.0'
+      - run: kubectl kustomize k8s/overlays/dev > /tmp/rendered.yaml
+      - run: test -s /tmp/rendered.yaml

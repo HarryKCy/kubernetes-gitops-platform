@@ -1,0 +1,10 @@
+*.backup
+*.bak
+*.swp
+*.tmp
+.env
+.venv/
+__pycache__/
+*.pyc
+.kube/
+kubeconfig*
